@@ -1,0 +1,57 @@
+name: Adobe CC
+game_slug: Adobe-CC
+version: Installer
+slug: adobe-cc-installer
+runner: wine
+
+script:
+  game:
+    exe: "$GAMEDIR/drive_c/Program Files/Adobe/Adobe Creative Cloud/ACC/Creative Cloud.exe"
+    prefix: $GAMEDIR
+    arch: win32
+  files:
+  - installer: https://ccmdls.adobe.com/AdobeProducts/KCCC/1/win32/CreativeCloudSet-Up.exe
+  - offline_files: http://ccmdl.adobe.com/AdobeProducts/KCCC/1/win32/ACCCx4_8_2_478.zip
+  installer:
+  - task:
+      arch: win32
+      name: winetricks
+      prefix: $GAMEDIR
+      app: fontsmooth=rgb gdiplus vcrun2008 vcrun2010 vcrun2012 vcrun2013 vcrun2015 vcrun2017 atmlib msxml3 msxml6 corefonts msls31 riched20 tahoma ie7 win81
+      silent: false
+  - extract:
+      dst: $CACHE/CreativeCloud-Setup
+      file: offline_files
+      format: zip 
+  - move:
+      src: installer
+      dst: $CACHE/CreativeCloud-Setup
+  - task:
+      arch: win32
+      description: Installing Creative Cloud... - WARNING Please Quit CC From Menu and signin after Installation finished.
+      executable: $CACHE/CreativeCloud-Setup/CreativeCloudSet-Up.exe
+      name: wineexec
+      prefix: $GAMEDIR
+  wine:
+    dxvk: true
+    esync: true
+    version: ge-protonified-4.10-x86_64
+  system:
+    pulse_latency: true
+    env:
+      PBA_DISABLE: 0
+      __GL_SHADER_DISK_CACHE: 1
+      __GL_SHADER_DISK_CACHE_PATH: $GAMEDIR
+      __GL_THREADED_OPTIMIZATIONS: 1
+      mesa_glthread: 'true'
+      
+
+
+
+
+
+
+
+
+
+      
