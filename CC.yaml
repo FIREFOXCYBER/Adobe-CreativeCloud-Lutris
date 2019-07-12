@@ -30,6 +30,7 @@ script:
       arch: win32
       description: Installing Creative Cloud... - WARNING Please Quit CC From Menu and signin after Installation finished.
       executable: $CACHE/CreativeCloud-Setup/CreativeCloudSet-Up.exe
+      exclude_processes: AGSService.exe AdobeIPCBroker.exe AdobeUpdateService.exe "Adobe Desktop Service.exe"
       name: wineexec
       prefix: $GAMEDIR
   wine:
