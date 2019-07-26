@@ -18,7 +18,7 @@ script:
       name: winetricks
       prefix: $GAMEDIR
       app: fontsmooth=rgb gdiplus vcrun2008 vcrun2010 vcrun2012 vcrun2013 vcrun2015 vcrun2017 atmlib msxml3 msxml6 corefonts msls31 riched20 tahoma win81
-      silent: false
+      silent: true
   - extract:
       dst: $CACHE/CreativeCloud-Setup
       file: offline_files
